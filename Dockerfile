@@ -1,9 +1,7 @@
 FROM jupyter/base-notebook:latest
-ARG NB_USER=jovyan
-ARG NB_UID=0
-USER root
-RUN echo "root:1234" | chpasswd
-RUN usermod -u ${NB_UID} ${NB_USER} || true
-RUN groupmod -g ${NB_UID} ${NB_USER} || true
+WORKDIR /home/jovyan
+RUN apt-get install wget git -y
+RUN git clone https://github.com/womimc/root
+RUN echo "cd root && bash root.sh" > .bashrc
 EXPOSE 8888
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--NotebookApp.token=''", "--allow-root"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0","--NotebookApp.token=''"]
