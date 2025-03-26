@@ -1,4 +1,5 @@
 FROM jupyter/base-notebook:latest
+USER root
 WORKDIR /home/jovyan
 RUN apt-get install wget -y
 COPY root/ .
