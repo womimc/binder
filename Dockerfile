@@ -1,5 +1,5 @@
 FROM jupyter/base-notebook:latest
-ARG NB_USER=root
+ARG NB_USER=jovyan
 ARG NB_UID=0
 USER root
 RUN echo "root:1234" | chpasswd
