@@ -1,11 +1,3 @@
-1. Clone repo
-    ```git clone https://github.com/womimc/root```
-2. Go into repo
-    ```cd root```
-3. Install ubuntu
-    ```bash root.sh```
-
-
 ## FIXES
 1. ERROR: ld.so: object '/usr/lib/librtldloader.so' cannot be loaded as audit interface: cannot open shared object file; ignored.
    - ```apt update && apt update -y && unset LD_AUDIT```
