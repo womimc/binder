@@ -1,9 +1,7 @@
 FROM jupyter/base-notebook:latest
 USER root
-WORKDIR /home/jovyan
-RUN apt-get install wget -y
-COPY root/ root/.
-RUN echo "cd root && bash root.sh" > .bashrc
-RUN printf "useradd -m user -s /bin/bash && usermod -aG sudo user && passwd -d user" | cd root && bash root.sh
-EXPOSE 8888
-CMD ["jupyter", "lab", "--ip=0.0.0.0","--NotebookApp.token=''"]
+RUN useradd -m user -s /bin/bash && \
+    usermod -aG sudo user && \
+    echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER jovyan
+CMD ["proot", "-0", "/bin/bash", "-c", "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --NotebookApp.token='' --allow-root"]
